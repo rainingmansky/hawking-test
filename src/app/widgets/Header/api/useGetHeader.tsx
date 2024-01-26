@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 type HeaderDataType = {
   LogoImg: string;
@@ -7,24 +7,14 @@ type HeaderDataType = {
   UserName: string;
 };
 
-export const useGetHeader = (): {
-  headerData: HeaderDataType | undefined;
-  error: string | undefined;
-} => {
-  const [headerData, setHeaderData] = useState<HeaderDataType>();
-  const [error, setError] = useState("");
+const fetcher = () =>
+  axios.get("/api/ShoppingCart/header").then((res) => res.data);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/ShoppingCart/header");
-        setHeaderData(response.data);
-      } catch (error) {
-        if (error instanceof Error) setError(error.message);
-      }
-    };
-    fetchData();
-  }, []);
+export const useGetHeader = () => {
+  const { data, error } = useSWR<HeaderDataType>(
+    "/api/ShoppingCart/header",
+    fetcher
+  );
 
-  return { headerData, error };
+  return { headerData: data, error };
 };

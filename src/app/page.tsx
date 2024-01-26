@@ -1,25 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Header } from "./widgets";
-import axios from "axios";
-
 export default function Home() {
-  const [isAuthorized, setIsAuthorized] = useState(false)
-  useEffect(() => {
-    const handlePost = async () => {
-      try {
-        const response = await axios.post('/api/Admin/create')
-        setIsAuthorized(response.data)
-      } catch (error) {
-        console.error('Error posting data:', error);
-      }
-    }
-    handlePost()
-  }, []);
   return (
-    <main className="flex w-full bg-main-bg h-screen">
-      {isAuthorized && <Header />}
+    <main className="flex w-full justify-center items-center h-screen">
+      <article className="flex text-center justify-center w-full text-lg font-bold">
+        Главная старница
+        <br />
+        Чтобы открыть корзину, нажмите на иконку в панели навигации
+      </article>
     </main>
   );
 }

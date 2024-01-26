@@ -1,10 +1,10 @@
 import React, { SVGProps } from "react";
 
 type CartIconProps = SVGProps<SVGSVGElement> & {
-    color: string;
+  color?: string;
 };
 
-const CartIcon: React.FC<CartIconProps> = ({ color, ...props}) => (
+const CartIcon: React.FC<CartIconProps> = ({ color, ...props }) => (
   <svg
     version="1.1"
     id="Capa_1"
@@ -12,7 +12,7 @@ const CartIcon: React.FC<CartIconProps> = ({ color, ...props}) => (
     x="0px"
     y="0px"
     viewBox="0 0 475.084 475.085"
-    fill={color ?? '#000'}
+    fill={color ?? "#000"}
     {...props}
   >
     <g>
